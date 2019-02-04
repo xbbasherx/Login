@@ -57,8 +57,8 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View V) {
 
-                String userName = etUsername.getText().toString();
-                String password = etPassword.getText().toString();
+                String userName = etUsername.getText().toString().trim();
+                String password = etPassword.getText().toString().trim();
 
                 /*if (userName == null || userName.equals("") && password == null || password.equals("")) {
                     Toast.makeText((getApplicationContext()), "Please enter Username and/or Password", Toast.LENGTH_SHORT).show();
@@ -80,28 +80,19 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 }*/
 
-                if (userName == null || userName.equals("") && password == null || password.equals("")) {
+                if (userName.isEmpty() || password.isEmpty()) {
                     Toast.makeText((getApplicationContext()), "Please enter Username and/or Password", Toast.LENGTH_SHORT).show();
                 }
-                String strCode = userName.trim();
-                String strCode2 = password.trim();
-                if (checkCode(strCode)){
-                        if(checkCode(strCode2)) {
-                            Toast.makeText(getApplicationContext(), "Redirecting...", Toast.LENGTH_SHORT).show();
-                            Intent loginIntent = new Intent(LoginActivity.this, UserAreaActivity.class);
-                            LoginActivity.this.startActivity(loginIntent);
-                        }
-                }else if (!checkCode(strCode) && !checkCode(strCode2) && !userName.equals("") && !password.equals("")) {
-                    Toast.makeText(getApplicationContext(), "Wrong Credentials", Toast.LENGTH_SHORT).show();
-
-                    tx1.setVisibility(View.VISIBLE);
-                    tx2.setVisibility(View.VISIBLE);
-                    counter--;
-                    tx1.setText(Integer.toString(counter));
-
-                    if (counter == 0) {
-                        bLogin.setEnabled(false);
+                else {
+                    if(checkUserCredentical("", "")){
+                        System.out.println("Work");
                     }
+                    else{
+                        System.out.println("Not Work");
+                    }
+
+
+
                 }
             }
         });
@@ -113,33 +104,26 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
-        public boolean checkCode (String code) {
-            String temp = null;
-            InputStream file = null;
-            try {
-                file = getAssets().open("users.txt");
-            } catch (IOException e) {
-                e.printStackTrace();
+
+    private boolean checkUserCredentical(String usrname, String password){
+        String tempUsername = "";
+        String tempPassword = "";
+
+        try{
+            BufferedReader file = new BufferedReader(new InputStreamReader(getAssets().open("users.txt"), "UTF-8"));
+            String mLine;
+            while ((mLine = file.readLine()) != null) {
+                System.out.println(mLine);
+
             }
-            BufferedReader reader;
-            reader = new BufferedReader(new InputStreamReader(file));
-            try {
-                temp = reader.readLine();
-                while (temp != null) {
-                    if (code.equals(temp)) {
-                        // Match was found
-                        // Clean up and return true
-                        reader.close();
-                        return true;
-                    }
-                        reader.readLine();
-                }
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                    e.printStackTrace();
-            }
+            return true;
+        }
+        catch (IOException err){
+            System.out.println(err);
             return false;
+            
+        }
+
     }
 }
 
