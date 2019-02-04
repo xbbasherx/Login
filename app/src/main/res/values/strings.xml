@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Music Player</string>
+    <string name="naturae">Naturae</string>
+    <string name="enter_name">Enter Name</string>
+    <string name="password">Password</string>
+    <string name="attempts_left">Attempts Left:</string>
+    <string name="cancel">Cancel</string>
+    <string name="username">Username</string>
+    <string name="register_here">Register Here</string>
+    <string name="login">login</string>
 </resources>

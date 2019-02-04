@@ -27,9 +27,9 @@ public class UserAreaActivity extends AppCompatActivity {
 
         setTitle("User Profile");
 
-        final TextView firstName = (TextView) findViewById(R.id.firstName);
-        final TextView lastName = (TextView) findViewById(R.id.lastName);
-        final Button bLogout = (Button) findViewById(R.id.bLogout);
+        final TextView firstName = findViewById(R.id.firstName);
+        final TextView lastName = findViewById(R.id.lastName);
+        final Button bLogout = findViewById(R.id.bLogout);
 
         bLogout.setOnClickListener(new View.OnClickListener() {
             @Override
